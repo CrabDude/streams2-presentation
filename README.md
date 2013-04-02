@@ -1,4 +1,4 @@
-# NodeJS Streams - Solving I/O Bound Problems
+# Streaming to You Live: The Node 0.10 Streams API
 
 These are the slides from my NodeJS Streams talk at
 [NovaNode](http://www.meetup.com/Nova-Node/) on 4/2/2013 based on my
