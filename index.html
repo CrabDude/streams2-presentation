@@ -307,6 +307,15 @@ fs.createReadStream('path/to/archive.zip')
 					<h1>Unzip Demo</h1>
 				</section>
 
+				<section data-markdown>
+					## Other Relevant API Changes
+					#### process.nextTick()
+
+					> process.nextTick happens at the end of the current tick, immediately after the current stack unwinds. If you are currently using recursive nextTick calls, use setImmediate instead.
+
+					[More 0.8 to 0.10 API Changes](https://github.com/joyent/node/wiki/Api-changes-between-v0.8-and-v0.10)
+				</section>
+
         <section>
           <h2>Example 0.8 Compatibility!</h2>
           
