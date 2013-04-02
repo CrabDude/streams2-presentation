@@ -1,17 +1,14 @@
 # NodeJS Streams - Solving I/O Bound Problems
 
-These are the slides from my NodeJS Streams talk at 
-[@NearInfinity](http://twitter.com/nearinfinity) / 
-[@Invertix](http://twitter.com/Invertix) on 3/13/2013 based on my experiences
-writing an [unzip](https://github.com/nearinfinity/node-unzip) parser with the
-Node 0.10 ["Streams2" API](http://blog.nodejs.org/2012/12/20/streams2/).
-Topics included event-driven programming in Node, using Streams, and writing
-custom Streams. I also explored some of the conceptual underpinnings required
-to solve streaming problems, including buffering and backpressure.
-
-## View the Slides
-
-http://evanoxfeld.github.com/streams-0.10-presentation
+These are the slides from my NodeJS Streams talk at
+[NovaNode](http://www.meetup.com/Nova-Node/) on 4/2/2013 based on my
+experiences writing an [unzip](https://github.com/nearinfinity/node-unzip)
+parser with the Node 0.10
+["Streams2" API](http://blog.nodejs.org/2012/12/20/streams2/). Topics
+included event-driven programming in Node, using Streams, and writing
+custom Streams. I also explored some of the conceptual underpinnings
+required to solve streaming problems, including buffering and
+backpressure.
 
 ## Node Modules Referenced
 The unzip and match-stream modules are streaming libraries that have
