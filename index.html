@@ -218,12 +218,8 @@ fs.createReadStream('path/to/archive.zip')
 					<h2>Streams of Tomorrow, Finally Here</h2>
 					<h4>Streams in 0.10</h4>
 					<ul>
-						<li>Readable streams are now suck streams</li>
-						<li class="fragment">read([size]) is equivalent to write(data)</li>
-						<ul class="fragment">
-							<li>read() returns null if less data is buffered than size</li>
-							<li>write() return false or pass a callback</li>
-						</ul>
+						<li>Readable streams are now "suck" streams</li>
+            <li class="fragment">Can use Readable to wrap old-style streams</li>
 						<li class="fragment">Object mode</li>
 						<li class="fragment">Same composable pipe API</li>
 						<li class="fragment">Shared base classes for backpressure and buffering</li>
@@ -235,19 +231,73 @@ fs.createReadStream('path/to/archive.zip')
 					</aside>
 			  </section>
 
-				<section>
-					<h2>Streams 0.10 Base Classes</h2>
-					<ul>
-						<li>Readable, Writable, Duplex</li>
-						<li class="fragment">Transform: implement _transform(chunk, encoding, cb)</li>
-						<li class="fragment">PassThrough: no method to implement</li>
-					</ul>
+        <section data-markdown>
+          ## Streams 0.10 Base Classes
+          #### stream.Readable
 
-					<aside class="notes">
-						Transform - output connected somewhat to input. Saves implementing both
+          * Implement readable._read(size)
+          * Queue data from I/O source
+            * push(chunk) or unshift(chunk)
+          * Users call read([size]) or pipe(dest)
+            * read() returns null if less data is buffered than size
+            * If objectMode is true, read(n) returns one object
+        </section>
+
+        <section>
+          <section data-markdown>
+            ## Streams 0.10 Base Classes
+            #### stream.Writable
+
+            * Implement writable._write(chunk, encoding, cb)
+            * Users call
+              * write(chunk, [encoding], [cb])
+                  * write() returns false if the buffer is full 
+              * end([chunk], [encoding], [cb])
+          </section>
+
+          <section>
+            <h2>Streams 0.10 Base Classes</h2>
+            <h4>stream.Duplex</h4>
+
+            <ul>
+              <li>Inherits from Readable and Writable</li>
+              <li>Implement _read() and _write()</li>
+              <li>Queue data with push() and unshift()</li>
+              <li>Users call Readable and Writable methods</li>
+            </ul>
+
+            <aside class="notes" data-markdown>
+              * Prototypical inheritance from Readable
+              * Parasitical inheritance from Writable
+            </aside>
+          </section>
+
+          <section>
+            <h2>Streams 0.10 Base Classes</h2>
+            <h4>stream.Transform</h4>
+
+            <ul>
+              <li>Inherits from Duplex</li>
+              <li>Implement transform._transform(chunk, encoding, cb)</li>
+              <li>Users call Readable and Writable methods</li>
+            </ul>
+
+            <aside class="notes" data-markdown>
+						  * Transform - output connected somewhat to input. Saves implementing both
 							_read() and _write()
-					</aside>
-				</section>
+              * Use this.push and this.unshift() to queue data
+            </aside>
+          </section>
+
+          <section data-markdown>
+            ## Streams 0.10 Base Classes
+            #### stream.PassThrough
+
+            * Inherits from Transform
+            * No method to implement
+            * Users call Readable and Writable methods
+          </section>
+        </section>
 
 				<section data-markdown>
 					# Example stream.Transform Code!
@@ -256,6 +306,12 @@ fs.createReadStream('path/to/archive.zip')
 				<section>
 					<h1>Unzip Demo</h1>
 				</section>
+
+        <section>
+          <h2>Example 0.8 Compatibility!</h2>
+          
+          <a href="https://npmjs.org/package/readable-stream">readable-stream module</a>
+        </section>
 
 				<section>
 					<h2>Conclusions</h2>
@@ -268,9 +324,9 @@ fs.createReadStream('path/to/archive.zip')
 					</ul>
 					<aside class="notes" data-markdown>
 						* Now you can use and write streams.
-						* If you have an I/O bound problem
-						  * Can you leverage NodeJS to solve it?
-							* Or think about what's possible with your current languages/platforms
+            * Streams2 API overall easier to reason about
+            * That said, spew streams style is occassionally useful
+              * Unzip - entry.autodrain reads on every 'readable'
 					</aside>
 				</section>
 
