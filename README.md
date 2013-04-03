@@ -10,6 +10,10 @@ custom Streams. I also explored some of the conceptual underpinnings
 required to solve streaming problems, including buffering and
 backpressure.
 
+## View the Slides
+
+http://evanoxfeld.github.com/novanode-streams-0.10-presentation
+
 ## Node Modules Referenced
 The unzip and match-stream modules are streaming libraries that have
 been written using the "Streams2" API. Both modules depend on the
